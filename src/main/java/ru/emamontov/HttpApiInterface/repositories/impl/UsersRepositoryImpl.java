@@ -21,7 +21,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Override
     public User addUser(String email, String password) {
-        User user = new User(id++, email, passwordEncryptionService.encrypt());
+        User user = new User(id++, email, passwordEncryptionService.encrypt(password));
         return users.putIfAbsent(user.getEmail(), user);
     }
 
