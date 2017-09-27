@@ -8,12 +8,14 @@ public class User {
     private final Date created;
     private String hashedPassword;
     private boolean verified = false;
+    private String confirmationToken;
 
     public User(int id, String email, String hashedPassword) {
         this.id = id;
         this.email = email;
         this.created = new Date();
         this.hashedPassword = hashedPassword;
+        this.confirmationToken = email;
     }
 
     public int getId() {
@@ -42,6 +44,10 @@ public class User {
 
     public void setVerified() {
         this.verified = true;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
     }
 
     @Override
