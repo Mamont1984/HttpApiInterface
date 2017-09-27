@@ -6,7 +6,8 @@ public class User {
     private final int id;
     private final String email;
     private final Date created;
-    private final String hashedPassword;
+    private String hashedPassword;
+    private boolean verified = false;
 
     public User(int id, String email, String hashedPassword) {
         this.id = id;
@@ -29,6 +30,18 @@ public class User {
 
     public String getHashedPassword() {
         return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified() {
+        this.verified = true;
     }
 
     @Override
