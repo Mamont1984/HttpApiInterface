@@ -26,13 +26,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         System.out.println(user);
 
         if (user == null) {
-        } else if (user.getHashedPassword() != encryptionService.encrypt(password)) {
-            new ErrorEntity(false, "Bad password!", "5");
+            return new ErrorEntity(false, "User not exist", "4");
+        } else if (!user.getHashedPassword().equals(encryptionService.encrypt(password))) {
+            return new ErrorEntity(false, "Bad password!", "5");
         } else if (!user.isVerified()) {
-            new ErrorEntity(false, "User not verified", "6");
-        } else {
-            return new AuthenticationEntity(true, "User authenticated!", user);
+            return new ErrorEntity(false, "User not verified", "6");
         }
-        return new ErrorEntity(false, "User not exist", "4");
+
+        return new AuthenticationEntity(true, "User authenticated!", user);
     }
 }
