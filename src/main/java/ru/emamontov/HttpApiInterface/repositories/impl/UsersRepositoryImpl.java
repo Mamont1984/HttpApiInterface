@@ -1,37 +1,38 @@
 package ru.emamontov.HttpApiInterface.repositories.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ru.emamontov.HttpApiInterface.repositories.UsersRepository;
 import ru.emamontov.HttpApiInterface.entities.User;
-import ru.emamontov.HttpApiInterface.services.PasswordEncryptionService;
+import ru.emamontov.HttpApiInterface.services.EncryptionService;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class UsersRepositoryImpl implements UsersRepository {
 
-    PasswordEncryptionService passwordEncryptionService;
-
-    public UsersRepositoryImpl(PasswordEncryptionService passwordEncryptionService) {
-        this.passwordEncryptionService = passwordEncryptionService;
-    }
+    @Autowired
+    EncryptionService encryptionService;
 
     private int id = 1;
-    private Map<String, User> users = new HashMap<>(); // HashMap подходит для многопоточности?
+    private Map<String, User> users = new HashMap<>(); // HashMap не подходит для многопоточности.
+    private Map<String, User> tokens = new HashMap<>();// HashMap не подходит для многопоточности.
 
     @Override
-    public User addUser(String email, String password) {
-        User user = new User(id++, email, passwordEncryptionService.encrypt(password));
-        return users.putIfAbsent(user.getEmail(), user);
+    public String addUser(String email, String password) {
+        User user = new User(id++, email, encryptionService.encrypt(password));
+        String token = null;
+        if (!users.containsKey(email)) {
+            users.put(email, user);
+            token = encryptionService.generateToken();
+            tokens.put(token, user);
+        }
+        return token;
     }
 
     @Override
-    public User getUser(User user) {
-        return users.get(user);
-    }
-
-    @Override
-    public void removeUser(User user) {
-        users.remove(user);
+    public User getUser(String email, String password) {
+        return users.get(email);
     }
 }
