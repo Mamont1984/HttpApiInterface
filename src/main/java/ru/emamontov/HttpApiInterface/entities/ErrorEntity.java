@@ -1,15 +1,15 @@
 package ru.emamontov.HttpApiInterface.entities;
 
-public class AuthentificationEntity extends Entity {
+public class ErrorEntity extends Entity {
 
     private final boolean success;
     private final String message;
-    private final User user;
+    private final String error;
 
-    public AuthentificationEntity(boolean success, String message, User user) {
+    public ErrorEntity(boolean success, String message, String error) {
         this.success = success;
         this.message = message;
-        this.user = user;
+        this.error = error;
     }
 
     public boolean isSuccess() {
@@ -20,7 +20,7 @@ public class AuthentificationEntity extends Entity {
         return message;
     }
 
-    public User getUser() {
-        return user;
+    public String getError() {
+        return error;
     }
 }

@@ -1,6 +1,6 @@
 package ru.emamontov.HttpApiInterface.entities;
 
-public final class RegistrationEntity extends Entity {
+public class RegistrationEntity extends Entity {
 
     private String email;
     private String password;

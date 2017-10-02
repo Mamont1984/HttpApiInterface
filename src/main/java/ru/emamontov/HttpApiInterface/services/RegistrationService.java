@@ -1,8 +1,8 @@
 package ru.emamontov.HttpApiInterface.services;
 
-import ru.emamontov.HttpApiInterface.entities.ConfirmationTokenEntity;
+import ru.emamontov.HttpApiInterface.entities.Entity;
 
 public interface RegistrationService extends Service {
 
-    public ConfirmationTokenEntity register(String email, String password);
+    public Entity register(String email, String password);
 }

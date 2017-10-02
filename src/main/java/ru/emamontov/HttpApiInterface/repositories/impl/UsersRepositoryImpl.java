@@ -32,7 +32,17 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     @Override
-    public User getUser(String email, String password) {
+    public User getUser(String email) {
         return users.get(email);
+    }
+
+    @Override
+    public User confirmUser(String token) {
+        if (tokens.containsKey(token)) {
+            User user = tokens.remove(token);
+            user.setVerified();
+            return user;
+        }
+        return null;
     }
 }

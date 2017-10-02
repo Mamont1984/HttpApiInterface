@@ -1,12 +1,16 @@
 package ru.emamontov.HttpApiInterface.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class User {
     private final int id;
     private final String email;
     private final Date created;
+    @JsonIgnore
     private String hashedPassword;
+    @JsonIgnore
     private boolean verified = false;
 
     public User(int id, String email, String hashedPassword) {
