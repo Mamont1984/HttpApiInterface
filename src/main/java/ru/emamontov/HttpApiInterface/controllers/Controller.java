@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.emamontov.HttpApiInterface.entities.*;
-import ru.emamontov.HttpApiInterface.services.AuthentificationService;
+import ru.emamontov.HttpApiInterface.services.AuthenticationService;
 import ru.emamontov.HttpApiInterface.services.ConfirmationService;
 import ru.emamontov.HttpApiInterface.services.RegistrationService;
 
@@ -19,7 +19,7 @@ public class Controller {
     @Autowired
     ConfirmationService confirmationService;
     @Autowired
-    AuthentificationService authentificationService;
+    AuthenticationService authenticationService;
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -66,6 +66,6 @@ public class Controller {
             e.printStackTrace();
             return new ErrorEntity(false, "Bad request", "1");
         }
-        return authentificationService.login(registrationEntity.getEmail(), registrationEntity.getPassword());
+        return authenticationService.login(registrationEntity.getEmail(), registrationEntity.getPassword());
     }
 }

@@ -2,16 +2,16 @@ package ru.emamontov.HttpApiInterface.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.emamontov.HttpApiInterface.entities.AuthentificationEntity;
+import ru.emamontov.HttpApiInterface.entities.AuthenticationEntity;
 import ru.emamontov.HttpApiInterface.entities.Entity;
 import ru.emamontov.HttpApiInterface.entities.ErrorEntity;
 import ru.emamontov.HttpApiInterface.entities.User;
 import ru.emamontov.HttpApiInterface.repositories.UsersRepository;
-import ru.emamontov.HttpApiInterface.services.AuthentificationService;
+import ru.emamontov.HttpApiInterface.services.AuthenticationService;
 import ru.emamontov.HttpApiInterface.services.EncryptionService;
 
 @Service
-public class AuthentificationServiceImpl implements AuthentificationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     UsersRepository usersRepository;
@@ -31,7 +31,7 @@ public class AuthentificationServiceImpl implements AuthentificationService {
         } else if (!user.isVerified()) {
             new ErrorEntity(false, "User not verified", "6");
         } else {
-            return new AuthentificationEntity(true, "User authenticated!", user);
+            return new AuthenticationEntity(true, "User authenticated!", user);
         }
         return new ErrorEntity(false, "User not exist", "4");
     }

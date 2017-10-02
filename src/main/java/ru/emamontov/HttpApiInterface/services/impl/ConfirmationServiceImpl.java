@@ -17,7 +17,7 @@ public class ConfirmationServiceImpl implements ConfirmationService {
 
         User user = usersRepository.confirmUser(tokenEntity.getToken());
         if (user != null) {
-            return new AuthentificationEntity(true, "User confirmed!", user);
+            return new AuthenticationEntity(true, "User confirmed!", user);
         }
         return new ErrorEntity(false, "Bad token", "3");
     }
