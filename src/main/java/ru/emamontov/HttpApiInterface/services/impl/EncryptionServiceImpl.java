@@ -12,7 +12,7 @@ public class EncryptionServiceImpl implements EncryptionService {
 
     @Override
     public String encrypt(String str) {
-        return new String("12345");
+        return String.valueOf(str.hashCode());
     }
 
     @Override

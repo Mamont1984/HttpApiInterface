@@ -23,12 +23,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         User user = usersRepository.getUser(email);
 
-        System.out.println(user);
-
         if (user == null) {
             return new ErrorEntity(false, "User not exist", "4");
         } else if (!user.getHashedPassword().equals(encryptionService.encrypt(password))) {
-            return new ErrorEntity(false, "Bad password!", "5");
+            return new ErrorEntity(false, "Wrong password!", "5");
         } else if (!user.isVerified()) {
             return new ErrorEntity(false, "User not verified", "6");
         }
