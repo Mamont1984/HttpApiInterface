@@ -2,12 +2,22 @@ package ru.emamontov.HttpApiInterface.entities;
 
 public class AuthenticationEntity extends Entity {
 
-    private final String message;
-    private final User user;
+    private String message;
+    private User user;
+
+    public AuthenticationEntity() {
+        super();
+    }
 
     public AuthenticationEntity(boolean success, String message, User user) {
         super(success);
         this.message = message;
+        this.user = user;
+    }
+
+    public AuthenticationEntity(boolean success, ResponseStatus error, User user) {
+        super(success);
+        this.message = error.getReasonPhrase();
         this.user = user;
     }
 

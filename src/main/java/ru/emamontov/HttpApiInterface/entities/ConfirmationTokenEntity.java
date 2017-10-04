@@ -2,8 +2,12 @@ package ru.emamontov.HttpApiInterface.entities;
 
 public class ConfirmationTokenEntity extends Entity {
 
-    private final String message;
-    private final String token;
+    private String message;
+    private String token;
+
+    public ConfirmationTokenEntity() {
+        super();
+    }
 
     public ConfirmationTokenEntity(boolean success, String message, String token) {
         super(success);

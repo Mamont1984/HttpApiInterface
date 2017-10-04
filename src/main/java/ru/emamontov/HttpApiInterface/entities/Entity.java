@@ -5,7 +5,10 @@ import java.io.Serializable;
 
 public class Entity implements Serializable {
 
-    protected final boolean success;
+    protected boolean success;
+
+    public Entity() {
+    }
 
     public Entity(boolean success) {
         this.success = success;

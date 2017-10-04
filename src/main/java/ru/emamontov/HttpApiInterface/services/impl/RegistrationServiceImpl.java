@@ -2,12 +2,9 @@ package ru.emamontov.HttpApiInterface.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.emamontov.HttpApiInterface.entities.ConfirmationTokenEntity;
-import ru.emamontov.HttpApiInterface.entities.Entity;
-import ru.emamontov.HttpApiInterface.entities.ErrorEntity;
+import ru.emamontov.HttpApiInterface.entities.*;
 import ru.emamontov.HttpApiInterface.repositories.UsersRepository;
 import ru.emamontov.HttpApiInterface.services.RegistrationService;
-import ru.emamontov.HttpApiInterface.entities.User;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -24,6 +21,6 @@ public class RegistrationServiceImpl implements RegistrationService {
             return new ConfirmationTokenEntity(true,"User created!", token);
         }
 
-        return new ErrorEntity(false, "User already exists", "2");
+        return new ErrorEntity(false, ResponseStatus.USER_ALREADY_EXIST);
     }
 }

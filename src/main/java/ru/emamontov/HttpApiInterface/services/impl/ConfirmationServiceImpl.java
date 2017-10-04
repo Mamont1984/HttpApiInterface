@@ -19,6 +19,6 @@ public class ConfirmationServiceImpl implements ConfirmationService {
         if (user != null) {
             return new AuthenticationEntity(true, "User confirmed!", user);
         }
-        return new ErrorEntity(false, "Bad token", "3");
+        return new ErrorEntity(false, ResponseStatus.BAD_TOKEN);
     }
 }

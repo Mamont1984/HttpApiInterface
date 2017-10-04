@@ -1,6 +1,5 @@
 package ru.emamontov.HttpApiInterface.controllers;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.emamontov.HttpApiInterface.entities.*;
+import ru.emamontov.HttpApiInterface.entities.ResponseStatus;
 import ru.emamontov.HttpApiInterface.services.AuthenticationService;
 import ru.emamontov.HttpApiInterface.services.ConfirmationService;
 import ru.emamontov.HttpApiInterface.services.RegistrationService;
@@ -36,7 +36,7 @@ public class Controller {
         try {
             registrationEntity = mapper.readValue(string, RegistrationEntity.class);
         } catch (IOException e) {
-            return new ResponseEntity(new ErrorEntity(false, "Bad request", "1"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ErrorEntity(false, ResponseStatus.BAD_REQUERST), HttpStatus.BAD_REQUEST);
         }
 
         Entity entity = registrationService.register(registrationEntity.getEmail(), registrationEntity.getPassword());
@@ -54,8 +54,9 @@ public class Controller {
         try {
             tokenEntity = mapper.readValue(string, TokenEntity.class);
         } catch (IOException e) {
-           return new ResponseEntity(new ErrorEntity(false, "Bad request", "1"), HttpStatus.BAD_REQUEST);
+           return new ResponseEntity(new ErrorEntity(false, ResponseStatus.BAD_REQUERST), HttpStatus.BAD_REQUEST);
         }
+
         Entity entity = confirmationService.confirm(tokenEntity);
 
         return new ResponseEntity(entity, entity.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
@@ -71,7 +72,7 @@ public class Controller {
         try {
             registrationEntity = mapper.readValue(string, RegistrationEntity.class);
         } catch (IOException  e) {
-            return new ResponseEntity( new ErrorEntity(false, "Bad request", "1"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity( new ErrorEntity(false, ResponseStatus.BAD_REQUERST), HttpStatus.BAD_REQUEST);
         }
 
         Entity entity = authenticationService.login(registrationEntity.getEmail(), registrationEntity.getPassword());

@@ -3,12 +3,18 @@ package ru.emamontov.HttpApiInterface.entities;
 public class ErrorEntity extends Entity {
 
     private final String message;
-    private final String error;
+    private final int error;
 
-    public ErrorEntity(boolean success, String message, String error) {
+    public ErrorEntity(boolean success, String message, int error) {
         super(success);
         this.message = message;
         this.error = error;
+    }
+
+    public ErrorEntity(boolean success, ResponseStatus error) {
+        super(success);
+        this.message = error.getReasonPhrase();
+        this.error = error.value();
     }
 
     public boolean isSuccess() {
@@ -19,7 +25,7 @@ public class ErrorEntity extends Entity {
         return message;
     }
 
-    public String getError() {
+    public int getError() {
         return error;
     }
 }
