@@ -1,8 +1,12 @@
 package ru.emamontov.HttpApiInterface.controllers;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.emamontov.HttpApiInterface.entities.*;
 import ru.emamontov.HttpApiInterface.services.AuthenticationService;
@@ -23,49 +27,55 @@ public class Controller {
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Entity register(@RequestBody String string){
+    public HttpEntity register(@RequestBody String string){
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
-        RegistrationEntity registrationEntity = null;
+        RegistrationEntity registrationEntity;
         try {
             registrationEntity = mapper.readValue(string, RegistrationEntity.class);
         } catch (IOException e) {
-            return new ErrorEntity(false, "Bad request", "1");
+            return new ResponseEntity(new ErrorEntity(false, "Bad request", "1"), HttpStatus.BAD_REQUEST);
         }
-        return registrationService.register(registrationEntity.getEmail(), registrationEntity.getPassword());
+
+        Entity entity = registrationService.register(registrationEntity.getEmail(), registrationEntity.getPassword());
+
+        return new ResponseEntity(entity, entity.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    public Entity confirm(@RequestBody String string) {
+    public HttpEntity confirm(@RequestBody String string) {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
-        TokenEntity tokenEntity = null;
+        TokenEntity tokenEntity;
         try {
             tokenEntity = mapper.readValue(string, TokenEntity.class);
         } catch (IOException e) {
-            e.printStackTrace();
-           return new ErrorEntity(false, "Bad request", "1");
+           return new ResponseEntity(new ErrorEntity(false, "Bad request", "1"), HttpStatus.BAD_REQUEST);
         }
-        return confirmationService.confirm(tokenEntity);
+        Entity entity = confirmationService.confirm(tokenEntity);
+
+        return new ResponseEntity(entity, entity.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Entity login(@RequestBody String string) {
+    public HttpEntity login(@RequestBody String string) {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 
-        RegistrationEntity registrationEntity = null;
+        RegistrationEntity registrationEntity;
         try {
             registrationEntity = mapper.readValue(string, RegistrationEntity.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ErrorEntity(false, "Bad request", "1");
+        } catch (IOException  e) {
+            return new ResponseEntity( new ErrorEntity(false, "Bad request", "1"), HttpStatus.BAD_REQUEST);
         }
-        return authenticationService.login(registrationEntity.getEmail(), registrationEntity.getPassword());
+
+        Entity entity = authenticationService.login(registrationEntity.getEmail(), registrationEntity.getPassword());
+
+        return new ResponseEntity(entity, entity.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }

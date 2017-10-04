@@ -4,6 +4,10 @@ public class TokenEntity extends Entity {
 
     private String token;
 
+    public TokenEntity(boolean success) {
+        super(success);
+    }
+
     public String getToken() {
         return token;
     }

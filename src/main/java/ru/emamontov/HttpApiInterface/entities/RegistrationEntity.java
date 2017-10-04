@@ -5,6 +5,10 @@ public class RegistrationEntity extends Entity {
     private String email;
     private String password;
 
+    public RegistrationEntity(boolean success) {
+        super(success);
+    }
+
     public String getEmail() {
         return email;
     }
