@@ -2,19 +2,17 @@ package ru.emamontov.HttpApiInterface.entities;
 
 public class ErrorEntity extends Entity {
 
-    private final String message;
-    private final int error;
+    private String message;
+    private int error;
 
-    public ErrorEntity(boolean success, String message, int error) {
-        super(success);
-        this.message = message;
-        this.error = error;
+    public ErrorEntity() {
+        super();
     }
 
-    public ErrorEntity(boolean success, ResponseStatus error) {
+    public ErrorEntity(boolean success, ResponseStatus responseStatus) {
         super(success);
-        this.message = error.getReasonPhrase();
-        this.error = error.value();
+        this.message = responseStatus.getReasonPhrase();
+        this.error = responseStatus.value();
     }
 
     public boolean isSuccess() {

@@ -36,7 +36,7 @@ public class Controller {
         try {
             registrationEntity = mapper.readValue(string, RegistrationEntity.class);
         } catch (IOException e) {
-            return new ResponseEntity(new ErrorEntity(false, ResponseStatus.BAD_REQUERST), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ErrorEntity(false, ResponseStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
 
         Entity entity = registrationService.register(registrationEntity.getEmail(), registrationEntity.getPassword());
@@ -54,7 +54,7 @@ public class Controller {
         try {
             tokenEntity = mapper.readValue(string, TokenEntity.class);
         } catch (IOException e) {
-           return new ResponseEntity(new ErrorEntity(false, ResponseStatus.BAD_REQUERST), HttpStatus.BAD_REQUEST);
+           return new ResponseEntity(new ErrorEntity(false, ResponseStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
 
         Entity entity = confirmationService.confirm(tokenEntity);
@@ -72,7 +72,7 @@ public class Controller {
         try {
             registrationEntity = mapper.readValue(string, RegistrationEntity.class);
         } catch (IOException  e) {
-            return new ResponseEntity( new ErrorEntity(false, ResponseStatus.BAD_REQUERST), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity( new ErrorEntity(false, ResponseStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }
 
         Entity entity = authenticationService.login(registrationEntity.getEmail(), registrationEntity.getPassword());

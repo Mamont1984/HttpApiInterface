@@ -18,7 +18,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         String token = usersRepository.addUser(email, password);
 
         if (token != null) {
-            return new ConfirmationTokenEntity(true,"User created!", token);
+            return new ConfirmationTokenEntity(true, ResponseStatus.OK, token);
         }
 
         return new ErrorEntity(false, ResponseStatus.USER_ALREADY_EXIST);

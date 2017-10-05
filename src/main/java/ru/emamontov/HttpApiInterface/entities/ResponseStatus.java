@@ -3,7 +3,7 @@ package ru.emamontov.HttpApiInterface.entities;
 public enum ResponseStatus {
 
     OK(0,"OK"),
-    BAD_REQUERST(1, "Bad request"),
+    BAD_REQUEST(1, "Bad request"),
     USER_ALREADY_EXIST(2, "User already exist"),
     BAD_TOKEN (3, "Bad token"),
     USER_NOT_EXIST(4, "User not exist"),

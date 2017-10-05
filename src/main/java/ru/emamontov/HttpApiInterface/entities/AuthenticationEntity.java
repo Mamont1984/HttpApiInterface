@@ -9,15 +9,9 @@ public class AuthenticationEntity extends Entity {
         super();
     }
 
-    public AuthenticationEntity(boolean success, String message, User user) {
+    public AuthenticationEntity(boolean success, ResponseStatus responseStatus, User user) {
         super(success);
-        this.message = message;
-        this.user = user;
-    }
-
-    public AuthenticationEntity(boolean success, ResponseStatus error, User user) {
-        super(success);
-        this.message = error.getReasonPhrase();
+        this.message = responseStatus.getReasonPhrase();
         this.user = user;
     }
 

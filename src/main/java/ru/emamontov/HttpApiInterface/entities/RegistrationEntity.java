@@ -6,7 +6,7 @@ public class RegistrationEntity extends Entity {
     private String password;
 
     public RegistrationEntity() {
-        super(false);
+        super();
     }
 
     public RegistrationEntity(boolean success) {

@@ -9,9 +9,9 @@ public class ConfirmationTokenEntity extends Entity {
         super();
     }
 
-    public ConfirmationTokenEntity(boolean success, String message, String token) {
+    public ConfirmationTokenEntity(boolean success, ResponseStatus responseStatus, String token) {
         super(success);
-        this.message = message;
+        this.message = responseStatus.getReasonPhrase();
         this.token = token;
     }
 
