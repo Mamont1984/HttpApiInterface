@@ -26,7 +26,7 @@ public class Controller {
     AuthenticationService authenticationService;
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
     public HttpEntity register(@RequestBody String string){
 
         ObjectMapper mapper = new ObjectMapper();
@@ -44,7 +44,7 @@ public class Controller {
         return new ResponseEntity(entity, entity.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST, produces = "application/json")
     public HttpEntity confirm(@RequestBody String string) {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -62,7 +62,7 @@ public class Controller {
         return new ResponseEntity(entity, entity.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     public HttpEntity login(@RequestBody String string) {
 
         ObjectMapper mapper = new ObjectMapper();
