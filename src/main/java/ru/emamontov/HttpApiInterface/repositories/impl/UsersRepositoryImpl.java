@@ -7,6 +7,7 @@ import ru.emamontov.HttpApiInterface.entities.User;
 import ru.emamontov.HttpApiInterface.services.EncryptionService;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 @Repository
@@ -16,8 +17,8 @@ public class UsersRepositoryImpl implements UsersRepository {
     EncryptionService encryptionService;
 
     private int id = 1;
-    private Map<String, User> users = new HashMap<>(); // HashMap не подходит для многопоточности.
-    private Map<String, User> tokens = new HashMap<>();// HashMap не подходит для многопоточности.
+    private Map<String, User> users = new Hashtable<>();
+    private Map<String, User> tokens = new Hashtable<>();
 
     @Override
     public String addUser(String email, String password) {
