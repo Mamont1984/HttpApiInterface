@@ -89,7 +89,7 @@ out error
   message: "описание ошибки",
   error: "error_code"
 }
-
+```
 
 Замечания:
 
